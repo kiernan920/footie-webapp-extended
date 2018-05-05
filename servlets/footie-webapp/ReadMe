@@ -1,0 +1,12 @@
+Run Jboss Server -->
+./jboss-eap-6.4/bin/standalone.sh
+
+Deploy Application -->
+mvn clean install. This will deploy the application onto JBoss
+
+Database Setup -->
+import footiedb_User.sql into MySql database
+
+Run Arquillian -->
+Run Jboss Server
+mvn clean test -Parq-jbossas-remote

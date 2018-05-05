@@ -1,0 +1,35 @@
+version: "2"
+
+services:
+
+  # Image Containing MySql
+  mysql:
+    container_name: mysql_container
+    image: mysql/mysql-server:5.7.20
+    environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=footiedb
+    volumes:
+      - ./databaseSql/:/docker-entrypoint-initdb.d/
+    ports:
+      - "3306:3306"
+    hostname: mysql-server
+
+  # Image containing JBoss AS server
+  jboss:
+    container_name: jboss_container
+    image: jboss/wildfly:latest
+    #links:
+    #  - mysql:mysql-server
+    ports:
+      - "9999:9999"
+      - "9990:9990"
+      - "8080:8080"
+      - "8787:8787"
+    volumes:
+      - ./com/:/opt/jboss/wildfly/modules/com/
+      - ./customization/:/opt/jboss/wildfly/customization/
+      - ./warToBeDeployed/:/opt/jboss/wildfly/warToBeDeployed/
+    command: /opt/jboss/wildfly/customization/execute.sh
+    tty: true
+    network_mode: host

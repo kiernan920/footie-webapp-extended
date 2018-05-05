@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Administrators Lobby</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+    <script src="js/jquery-ui-1.10.4.custom.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/custom-theme/jquery-ui-1.10.4.custom.css"/>
+    <script src="js/create_user.js"></script>
+</head>
+<body>
+<div id="innerBody">
+    <Header>
+        <img src="img/fpl-logo-full.svg">
+    </Header>
+    <Button class="button" id="logoutbutton">Logout</Button>
+    <br> <br>
+
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-0" id="tab0">Create User</a></li>
+            <li><a href="#tabs-1" id="tab1">Tab 2</a></li>
+        </ul>
+
+        <div id="tabs-0">
+            <div id="login">
+                <h2>
+                    <span class="fontawesome-lock"></span>Create User
+                </h2>
+                <form method="POST">
+                    <fieldset>
+                        <p>
+                            <label for="firstName">First Name:&nbsp;&nbsp;</label> <input
+                                type="text" size="30" placeholder="enter your first name..."
+                                id="firstname" required>
+                        </p>
+                        <p>
+                            <label for="Surname">Surname:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <input type="text" size="30"
+                                   placeholder="enter your last name..." name="lastname"
+                                   id="lastname" required>
+                        </p>
+                        <p>
+                            <label for="Gender">Gender:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <input type="radio" name="gender" id="male" value="male" checked>Male
+                            <input type="radio" name="gender" id="female" value="female">Female
+                        </p>
+                        <p>
+                            <label for="Address">Address:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <input type="text" size="30" placeholder="enter your address..."
+                                   name="address" id="address" required>
+                        </p>
+                        <p>
+                            <label for="PhoneNumber">Phone No: &nbsp;&nbsp;</label> <input
+                                type="text" size="30" placeholder="enter your phone number..."
+                                name="phone" id="phone" required>
+                        </p>
+                        <p>
+                            <label for="E-mail">E-mail:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <input type="email" size="30" placeholder="enter your email..."
+                                   name="email" id="email" required>
+                        </p>
+                        <p>
+                            <label for="Username">Username:&nbsp;&nbsp;</label> <input
+                                type="text" size="30" placeholder="enter your username..."
+                                name="username" id="username" required>
+                        </p>
+                        <p>
+                            <label for="Password">Password:&nbsp;&nbsp;&nbsp;</label> <input
+                                type="password" size="30" placeholder="enter your password..."
+                                name="password" id="password" required>
+                        </p>
+                        <input type="radio" name="usertype" value="administrator" id="administrator">Administrator<br>
+                        <input type="radio" name="usertype" value="customerrep" id="customerrep">Customer Service Representative<br>
+                        <br>
+                        <div id="adduserclearbtn" align="center">
+                            <input id="doSearch" type="submit" value="Add User"> <input
+                                type="reset" value="Clear" id="clearbutton">
+                        </div>
+                        <p id="paragraph" align="center"></p>
+                    </fieldset>
+                </form>
+            </div>
+            <hr>
+        </div>
+        <div id="tabs-1">
+            <h1>Tab 2</h1>
+        </div>
+    </div>
+</div>
+</body>
+</body>
+</html>
