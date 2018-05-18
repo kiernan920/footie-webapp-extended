@@ -16,9 +16,9 @@ services:
     hostname: mysql-server
 
   # Image containing JBoss AS server
-  jboss:
-    container_name: jboss_container
-    image: jboss/wildfly:latest
+  jboss1:
+    container_name: jboss_container1
+    image: jboss/wildfly:12.0.0.Final
     #links:
     #  - mysql:mysql-server
     ports:
@@ -33,3 +33,22 @@ services:
     command: /opt/jboss/wildfly/customization/execute.sh
     tty: true
     network_mode: host
+
+     # Image containing JBoss AS server
+  jboss2:
+     container_name: jboss_container2
+     image: jboss/wildfly:12.0.0.Final
+       #links:
+       #  - mysql:mysql-server
+     ports:
+       - "7111:9999"
+       - "7112:9990"
+       - "7113:8080"
+       - "6114:8787"
+     volumes:
+       - ./com/:/opt/jboss/wildfly/modules/com/
+       - ./customization/:/opt/jboss/wildfly/customization/
+       - ./warToBeDeployed/:/opt/jboss/wildfly/warToBeDeployed/
+     command: /opt/jboss/wildfly/customization/execute2.sh
+     tty: true
+     network_mode: host
