@@ -22,7 +22,7 @@ cp -rf /opt/jboss/wildfly/customization/standalone.conf /opt/jboss/wildfly/bin/
 
 echo "=> Starting WildFly server"
 sleep 7
-$JBOSS_HOME/bin/${JBOSS_MODE_ARRAY[1]}.sh > /dev/null &
+$JBOSS_HOME/bin/${JBOSS_MODE_ARRAY[1]}.sh  > /dev/null &
 #-c $JBOSS_CONFIG
 
 #echo "=> Waiting for the server to boot"
