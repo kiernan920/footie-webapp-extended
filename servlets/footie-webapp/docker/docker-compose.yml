@@ -21,6 +21,7 @@ services:
       - ./com/:/opt/jboss/wildfly/modules/com/
       - ./customization/:/opt/jboss/wildfly/customization/
       - ./warToBeDeployed/:/opt/jboss/wildfly/warToBeDeployed/
+      - ./ha/:/opt/jboss/wildfly/ha/
     command: /opt/jboss/wildfly/customization/execute.sh
     tty: true
     network_mode: host
