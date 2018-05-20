@@ -16,6 +16,8 @@ function wait_for_server() {
     sleep 1
   done
 }
+
+cp -rf /opt/jboss/wildfly/customization/domain.xml /opt/jboss/wildfly/domain/configuration
 cp -rf /opt/jboss/wildfly/ha/host.xml /opt/jboss/wildfly/domain/configuration
 cp -rf /opt/jboss/wildfly/customization/standalone.conf /opt/jboss/wildfly/bin/
 
