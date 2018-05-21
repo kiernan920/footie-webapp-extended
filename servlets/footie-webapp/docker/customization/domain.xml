@@ -1845,7 +1845,7 @@
             </jvm>
             <socket-binding-group ref="full-ha-sockets"/>
             <deployments>
-          
+
             </deployments>
         </server-group>
     </server-groups>
