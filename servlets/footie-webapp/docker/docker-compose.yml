@@ -24,7 +24,9 @@ services:
       - ./ha/:/opt/jboss/wildfly/ha/
     command: /opt/jboss/wildfly/customization/execute.sh
     tty: true
-    network_mode: host
+    networks:
+          vpcbr:
+             ipv4_address: 10.5.0.2
 
   jboss2:
      container_name: jboss_container2
@@ -35,4 +37,21 @@ services:
        - ./warToBeDeployed/:/opt/jboss/wildfly/warToBeDeployed/
      command: /opt/jboss/wildfly/customization/execute2.sh
      tty: true
-     network_mode: host
+     networks:
+           vpcbr:
+             ipv4_address: 10.5.0.3
+
+  modcluster:
+      container_name: modcluster_container
+      image: nonymus/modcluster:latest
+      networks:
+         vpcbr:
+            ipv4_address: 10.5.0.4
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
+         gateway: 10.5.0.1
