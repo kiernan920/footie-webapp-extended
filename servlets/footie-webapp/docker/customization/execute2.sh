@@ -12,25 +12,25 @@ JBOSS_MODE_ARRAY=( "standalone" "domain" )
 JBOSS_CONFIG=${2:-"$JBOSS_MODE.xml"}
 
 function wait_for_server() {
-  until `$JBOSS_CLI --controller=localhost:9992 -c "ls /deployment" &> /dev/null`; do
+  until `$JBOSS_CLI --controller=10.5.0.2:9990 -c "ls /deployment" &> /dev/null`; do
     sleep 5
   done
 }
 cp -rf /opt/jboss/wildfly/customization/domain.xml /opt/jboss/wildfly/domain/configuration
 cp -rf /opt/jboss/wildfly/customization/host.xml /opt/jboss/wildfly/domain/configuration
-cp -rf /opt/jboss/wildfly/customization/standalone.xml /opt/jboss/wildfly/standalone/configuration/
-cp -rf /opt/jboss/wildfly/customization/standalone.conf /opt/jboss/wildfly/bin/
+#cp -rf /opt/jboss/wildfly/customization/standalone.xml /opt/jboss/wildfly/standalone/configuration/
+#cp -rf /opt/jboss/wildfly/customization/standalone.conf /opt/jboss/wildfly/bin/
 
 echo "=> Starting WildFly server"
 sleep 7
 $JBOSS_HOME/bin/${JBOSS_MODE_ARRAY[1]}.sh  > /dev/null &
 #-c $JBOSS_CONFIG
 
-#echo "=> Waiting for the server to boot"
-#wait_for_server
+echo "=> Waiting for the server to boot"
+wait_for_server
 
-#echo "=> Executing the commands"
-#$JBOSS_CLI -c --controller=localhost:9992 --file=`dirname "$0"`/commands.cli
+echo "=> Executing the commands"
+#$JBOSS_CLI -c --controller=10.5.0.2:9990 --file=`dirname "$0"`/commands.cli
 
 #echo "=> Copying WAR"
 

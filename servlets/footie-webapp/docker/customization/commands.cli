@@ -2,10 +2,10 @@
 batch
 
 # Add MySQL driver
-/subsystem=datasources/jdbc-driver=mysql:add(driver-name=mysql,driver-module-name=com.mysql.jdbc,driver-xa-datasource-class-name=com.mysql.jdbc.jdbc2.optional.MysqlXADataSource)
+/profile=full-ha/subsystem=datasources/jdbc-driver=mysql:add(driver-name="mysql",driver-module-name="com.mysql.jdbc",driver-class-name="com.mysql.jdbc.Driver")
 
 # Add the datasource
-data-source add --name=Tutorial --driver-name=mysql --jndi-name=java:/tutorial --connection-url=jdbc:mysql://localhost:3306/footiedb?useUnicode=true&amp;characterEncoding=UTF-8 --user-name=root --password=root --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true
+data-source --profile=full-ha add --name=Tutorial --driver-name=mysql --jndi-name=java:/tutorial --connection-url=jdbc:mysql://localhost:3306/footiedb?useUnicode=true&amp;characterEncoding=UTF-8 --user-name=root --password=root --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true
 
 # Execute the batch
 run-batch
