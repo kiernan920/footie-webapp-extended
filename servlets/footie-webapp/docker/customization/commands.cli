@@ -7,5 +7,8 @@ batch
 # Add the datasource
 data-source --profile=full-ha add --name=Tutorial --driver-name=mysql --jndi-name=java:/tutorial --connection-url=jdbc:mysql://10.5.0.5:3306/footiedb?useUnicode=true&amp;characterEncoding=UTF-8 --user-name=root --password=root --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true
 
+# Add warToBeDeployed
+deploy /opt/jboss/wildfly/warToBeDeployed/footie-webapp.war --server-groups=other-server-group
+
 # Execute the batch
 run-batch
