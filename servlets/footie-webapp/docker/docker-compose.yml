@@ -13,6 +13,9 @@ services:
     ports:
       - "3306:3306"
     hostname: mysql-server
+    networks:
+          vpcbr:
+             ipv4_address: 10.5.0.5
 
   jboss1:
     container_name: jboss_container1

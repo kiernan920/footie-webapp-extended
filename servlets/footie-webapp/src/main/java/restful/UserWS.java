@@ -33,6 +33,7 @@ public class UserWS {
 	public Response checkUserNameAndPassword(
 			@PathParam("username") String username,
 			@PathParam("password") String password) {
+		System.out.println("HELLO (((*$$***£*£*£** ***£*");
 		final String SALT = "SALT";
 		HashPassword hp = new HashPassword();
 		String hashedPassword = hp.hashPassword(password+SALT);
