@@ -730,7 +730,7 @@
                 </mail-session>
             </subsystem>
             <subsystem xmlns="urn:jboss:domain:modcluster:3.0">
-                <mod-cluster-config advertise-socket="modcluster" connector="ajp" proxies="proxy1" advertise="true">
+                <mod-cluster-config advertise-socket="modcluster" connector="ajp" advertise="true">
                     <dynamic-load-provider>
                         <load-metric type="cpu"/>
                     </dynamic-load-provider>
@@ -1599,7 +1599,7 @@
                 </server>
             </subsystem>
             <subsystem xmlns="urn:jboss:domain:modcluster:3.0">
-                <mod-cluster-config advertise-socket="modcluster" connector="ajp" proxies="proxy1" advertise="true">
+                <mod-cluster-config advertise-socket="modcluster" connector="ajp" advertise="true">
                     <dynamic-load-provider>
                         <load-metric type="cpu"/>
                     </dynamic-load-provider>
@@ -1793,9 +1793,6 @@
             <outbound-socket-binding name="mail-smtp">
                 <remote-destination host="localhost" port="25"/>
             </outbound-socket-binding>
-            <outbound-socket-binding name="proxy1">
-                <remote-destination host="localhost" port="8888"/>
-            </outbound-socket-binding>
         </socket-binding-group>
         <socket-binding-group name="full-sockets" default-interface="public">
             <socket-binding name="ajp" port="${jboss.ajp.port:8009}"/>
@@ -1807,9 +1804,6 @@
             <socket-binding name="txn-status-manager" port="4713"/>
             <outbound-socket-binding name="mail-smtp">
                 <remote-destination host="localhost" port="25"/>
-            </outbound-socket-binding>
-            <outbound-socket-binding name="proxy1">
-                <remote-destination host="localhost" port="8888"/>
             </outbound-socket-binding>
         </socket-binding-group>
         <socket-binding-group name="full-ha-sockets" default-interface="public">
@@ -1827,18 +1821,12 @@
             <outbound-socket-binding name="mail-smtp">
                 <remote-destination host="localhost" port="25"/>
             </outbound-socket-binding>
-            <outbound-socket-binding name="proxy1">
-                <remote-destination host="localhost" port="8888"/>
-            </outbound-socket-binding>
         </socket-binding-group>
         <socket-binding-group name="load-balancer-sockets" default-interface="public">
             <socket-binding name="http" port="${jboss.http.port:8080}"/>
             <socket-binding name="https" port="${jboss.https.port:8443}"/>
             <socket-binding name="mcmp-management" interface="private" port="${jboss.mcmp.port:8090}"/>
             <socket-binding name="modcluster" interface="private" multicast-address="${jboss.modcluster.multicast.address:224.0.1.105}" multicast-port="23364"/>
-            <outbound-socket-binding name="proxy1">
-                <remote-destination host="localhost" port="8888"/>
-            </outbound-socket-binding>
         </socket-binding-group>
     </socket-binding-groups>
     <deployments>
