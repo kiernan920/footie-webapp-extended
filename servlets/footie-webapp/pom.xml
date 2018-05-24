@@ -146,6 +146,49 @@
 	</build>
 
 	<profiles>
+		
+		<profile>
+			<id>deployToDocker</id>
+			<build>
+				<plugins>
+					<plugin>
+					    <groupId>org.jboss.as.plugins</groupId>
+					    <artifactId>jboss-as-maven-plugin</artifactId>
+					    <version>7.9.Final</version>
+						<configuration>
+						    <domain>
+			                    <server-groups>
+		    	                   <server-group>main-server-group</server-group>
+		        	            </server-groups>
+					        </domain>
+			            </configuration>
+					    <executions>
+	      			  	  <execution>
+				 	           <phase>install</phase>
+				         	   <goals>
+				         	       <goal>deploy</goal>
+				          	   </goals>
+				         	   <!-- Only remote server needs -->
+					            <configuration>
+					                <hostname>10.5.0.2</hostname>
+					                <port>9999</port>
+					                <username>admin1</username>
+					                <password>admin1</password>
+					            </configuration>								
+				     	   </execution>    
+	   				 </executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>${version.surefire.plugin}</version>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
 		<profile>
 			<id>default</id>
 			<activation>

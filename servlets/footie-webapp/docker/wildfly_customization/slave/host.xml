@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 
-<host xmlns="urn:jboss:domain:6.0" name="master">
+<host xmlns="urn:jboss:domain:6.0" name="slave">
     <extensions>
         <extension module="org.jboss.as.jmx"/>
         <extension module="org.wildfly.extension.core-management"/>
@@ -9,6 +9,9 @@
     <management>
         <security-realms>
             <security-realm name="ManagementRealm">
+                <server-identities>
+                    <secret value="c2xhdmU="></secret>
+                </server-identities>
                 <authentication>
                     <local default-user="$local" skip-group-loading="true"/>
                     <properties path="mgmt-users.properties" relative-to="jboss.domain.config.dir"/>
@@ -62,16 +65,16 @@
         </management-interfaces>
     </management>
     <domain-controller>
-        <local/>
+        <!--<local/>-->
         <!-- Alternative remote domain controller configuration with a host and port -->
-        <!-- <remote protocol="remote" host="${jboss.domain.master.address}" port="${jboss.domain.master.port:9999}" security-realm="ManagementRealm"/> -->
+         <remote protocol="remote" host="${jboss.domain.master.address:10.5.0.2}" port="${jboss.domain.master.port:9999}" security-realm="ManagementRealm"/>
     </domain-controller>
     <interfaces>
         <interface name="management">
-            <inet-address value="${jboss.bind.address.management:10.5.0.2}"/>
+            <inet-address value="${jboss.bind.address.management:10.5.0.3}"/>
         </interface>
         <interface name="public">
-            <inet-address value="${jboss.bind.address:10.5.0.2}"/>
+            <inet-address value="${jboss.bind.address:10.5.0.3}"/>
         </interface>
     </interfaces>
     <jvms>
@@ -86,7 +89,7 @@
         </jvm>
     </jvms>
     <servers>
-        <server name="server-one" group="main-server-group">
+        <server name="server-one" group="main-server-group" auto-start="false">
             <!--
               ~  Remote JPDA debugging for a specific server
               ~             <jvm name="default">
@@ -97,7 +100,7 @@
               ~
               -->
         </server>
-        <server name="server-two" group="main-server-group" auto-start="true">
+        <server name="server-two" group="main-server-group" auto-start="false">
             <jvm name="default"/>
             <!--
               ~  server-two avoids port conflicts by incrementing the ports in
@@ -105,13 +108,13 @@
               -->
             <socket-bindings port-offset="150"/>
         </server>
-        <server name="server-three" group="other-server-group" auto-start="true">
+        <server name="server-three-slave" group="other-server-group" auto-start="true">
             <jvm name="default"/>
             <!--
               ~  server-three avoids port conflicts by incrementing the ports in
               ~                  the default socket-group declared in the server-group
               -->
-            <socket-bindings port-offset="251"/>
+            <socket-bindings port-offset="250"/>
         </server>
     </servers>
     <profile>

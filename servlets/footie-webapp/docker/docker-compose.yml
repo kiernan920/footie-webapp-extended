@@ -2,28 +2,13 @@ version: "2"
 
 services:
 
-  mysql:
-    container_name: mysql_container
-    image: mysql/mysql-server:5.7.20
-    environment:
-        - MYSQL_ROOT_PASSWORD=root
-        - MYSQL_DATABASE=footiedb
-    volumes:
-      - ./databaseSql/:/docker-entrypoint-initdb.d/
-    ports:
-      - "3306:3306"
-    hostname: mysql-server
-    networks:
-          vpcbr:
-             ipv4_address: 10.5.0.5
-
   jboss1:
-    container_name: jboss_container1
+    container_name: wildfly_container1
     image: jboss/wildfly:12.0.0.Final
     volumes:
-      - ./com/:/opt/jboss/wildfly/modules/com/
-      - ./customization/:/opt/jboss/wildfly/customization/
-      - ./warToBeDeployed/:/opt/jboss/wildfly/warToBeDeployed/
+      - ./wildfly_customization/com/:/opt/jboss/wildfly/modules/com/
+      - ./wildfly_customization/:/opt/jboss/wildfly/customization/
+      - ./wildfly_customization/warToBeDeployed/:/opt/jboss/wildfly/warToBeDeployed/
     command: /opt/jboss/wildfly/customization/master/execute_config_for_master.sh
     tty: true
     networks:
@@ -31,17 +16,32 @@ services:
              ipv4_address: 10.5.0.2
 
   jboss2:
-     container_name: jboss_container2
+     container_name: wildfly_container2
      image: jboss/wildfly:12.0.0.Final
      volumes:
-       - ./com/:/opt/jboss/wildfly/modules/com/
-       - ./customization/:/opt/jboss/wildfly/customization/
-       - ./warToBeDeployed/:/opt/jboss/wildfly/warToBeDeployed/
+       - ./wildfly_customization/com/:/opt/jboss/wildfly/modules/com/
+       - ./wildfly_customization/:/opt/jboss/wildfly/customization/
+       - .wildfly_customization/warToBeDeployed/:/opt/jboss/wildfly/warToBeDeployed/
      command: /opt/jboss/wildfly/customization/slave/execute_config_for_slave.sh
      tty: true
      networks:
            vpcbr:
              ipv4_address: 10.5.0.3
+
+  mysql:
+    container_name: mysql_container
+    image: mysql/mysql-server:5.7.20
+    environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=footiedb
+    volumes:
+      - ./database_configuration/:/docker-entrypoint-initdb.d/
+    ports:
+      - "3306:3306"
+    hostname: mysql-server
+    networks:
+          vpcbr:
+             ipv4_address: 10.5.0.5
 
   modcluster:
       container_name: modcluster_container
