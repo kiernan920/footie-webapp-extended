@@ -24,8 +24,7 @@ services:
       - ./com/:/opt/jboss/wildfly/modules/com/
       - ./customization/:/opt/jboss/wildfly/customization/
       - ./warToBeDeployed/:/opt/jboss/wildfly/warToBeDeployed/
-      - ./ha/:/opt/jboss/wildfly/ha/
-    command: /opt/jboss/wildfly/customization/execute.sh
+    command: /opt/jboss/wildfly/customization/master/execute_config_for_master.sh
     tty: true
     networks:
           vpcbr:
@@ -38,7 +37,7 @@ services:
        - ./com/:/opt/jboss/wildfly/modules/com/
        - ./customization/:/opt/jboss/wildfly/customization/
        - ./warToBeDeployed/:/opt/jboss/wildfly/warToBeDeployed/
-     command: /opt/jboss/wildfly/customization/execute2.sh
+     command: /opt/jboss/wildfly/customization/slave/execute_config_for_slave.sh
      tty: true
      networks:
            vpcbr:
@@ -46,7 +45,7 @@ services:
 
   modcluster:
       container_name: modcluster_container
-      image: nonymus/modcluster:latest
+      build: ./modcluster
       networks:
          vpcbr:
             ipv4_address: 10.5.0.4
