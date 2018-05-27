@@ -6,31 +6,43 @@ JBOSS_MODE=${1:-"standalone"}
 JBOSS_MODE_ARRAY=( "standalone" "domain" )
 JBOSS_CONFIG=${2:-"$JBOSS_MODE.xml"}
 
+function waitForSlaveToBoot {
+	status=""
+	while [[ "$status" != *'STARTED'* ]];do
+		status=$(/opt/jboss/wildfly/bin/jboss-cli.sh -c --controller=10.5.0.2:9990 --commands="/host=slave/server-config=server-three-slave:read-resource(include-runtime=true)" | grep "STARTED")
+		echo $status
+		if [[ "$status" != *"STARTED"* ]]; then
+			echo "Master waiting for Slave..."
+			sleep 1
+		fi
+	done
+}
+
+
 function wait_for_server() {
   until `$JBOSS_CLI -c --controller=10.5.0.2:9990 "ls /deployment" &> /dev/null`; do
+    echo "Waiting for Master CLI"
     sleep 1
   done
 }
 
+
+
 cp -rf /opt/jboss/wildfly/customization/common/domain.xml /opt/jboss/wildfly/domain/configuration
 cp -rf /opt/jboss/wildfly/customization/master/host.xml /opt/jboss/wildfly/domain/configuration
 
-echo "=> Starting WildFly server"
+echo "Starting Master"
 $JBOSS_HOME/bin/${JBOSS_MODE_ARRAY[1]}.sh > /dev/null &
 
 /opt/jboss/wildfly/bin/add-user.sh --silent=true admin1 admin1
 /opt/jboss/wildfly/bin/add-user.sh --silent=true slave slave
 
-echo "=> Waiting for the server to boot"
-wait_for_server
-
-sleep 20
+waitForSlaveToBoot
 
 echo "=> Executing the commands"
 $JBOSS_CLI -c --controller=10.5.0.2:9990 --file=`dirname "$0"`/commands.cli
 
-#echo "=> Tailing server.log"
-
-#tail -f /opt/jboss/wildfly/standalone/log/server.log
-
+echo "=> Tailing Log"
+tail -f  wildfly/domain/servers/server-three/log/server.log
 tail -f /opt/jboss/wildfly/domain/log/host-controller.log
+
