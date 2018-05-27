@@ -112,6 +112,12 @@
 			<artifactId>httpcore</artifactId>
 			<version>4.4</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>1.7.25</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<!-- Maven will append the version to the finalName (which is the name
@@ -126,22 +132,7 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
-			<!-- The JBoss AS plugin deploys your war to a local JBoss AS container -->
-			<!-- To use, run: mvn package jboss-as:deploy -->
-			<!--<plugin>
-				<groupId>org.jboss.as.plugins</groupId>
-				<artifactId>jboss-as-maven-plugin</artifactId>
-				<version>7.5.Final</version>
-				<executions>
-					<execution>
-						<phase>install</phase>
-						<goals>
-							<goal>deploy</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			-->
+
 		</plugins>
 	</build>
 
@@ -158,7 +149,7 @@
 						<configuration>
 						    <domain>
 			                    <server-groups>
-		    	                   <server-group>main-server-group</server-group>
+		    	                   <server-group>other-server-group</server-group>
 		        	            </server-groups>
 					        </domain>
 			            </configuration>

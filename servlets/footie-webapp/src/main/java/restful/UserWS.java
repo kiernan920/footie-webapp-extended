@@ -1,6 +1,8 @@
 package restful;
 
 import dao.UserDAO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import tableEntities.User;
 import utility.HashPassword;
 
@@ -11,6 +13,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
@@ -22,9 +25,12 @@ public class UserWS {
 	@EJB
     UserDAO userDAO;
 
+	Logger logger = LoggerFactory.getLogger(UserWS.class);
+
 	@GET
 	@Path("/test")
 	public Response test(){
+	    logger.info("TEST URL HIT");
 		return Response.status(200).entity("{\"response\":\"testResponse\"}").build();
 	}
 	

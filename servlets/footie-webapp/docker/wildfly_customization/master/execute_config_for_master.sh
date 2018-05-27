@@ -18,16 +18,6 @@ function waitForSlaveToBoot {
 	done
 }
 
-
-function wait_for_server() {
-  until `$JBOSS_CLI -c --controller=10.5.0.2:9990 "ls /deployment" &> /dev/null`; do
-    echo "Waiting for Master CLI"
-    sleep 1
-  done
-}
-
-
-
 cp -rf /opt/jboss/wildfly/customization/common/domain.xml /opt/jboss/wildfly/domain/configuration
 cp -rf /opt/jboss/wildfly/customization/master/host.xml /opt/jboss/wildfly/domain/configuration
 
