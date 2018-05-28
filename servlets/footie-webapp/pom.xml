@@ -129,10 +129,9 @@
 				<version>${version.war.plugin}</version>
 				<configuration>
 					<!-- Java EE 6 doesn't require web.xml, Maven needs to catch up! -->
-					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<failOnMissingWebXml>false</failOnMissingWebXml>      
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
 
@@ -174,6 +173,15 @@
 						<version>${version.surefire.plugin}</version>
 						<configuration>
 							<skip>true</skip>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-war-plugin</artifactId>
+						<version>${version.war.plugin}</version>
+						<configuration>
+							<!-- Java EE 6 doesn't require web.xml, Maven needs to catch up! -->
+							 <failOnMissingWebXml>false</failOnMissingWebXml>
+				     	     <outputDirectory>./docker/wildfly_customization/warToBeDeployed</outputDirectory>        
 						</configuration>
 					</plugin>
 				</plugins>
