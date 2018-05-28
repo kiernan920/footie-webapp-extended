@@ -3,6 +3,7 @@ package restful;
 import dao.UserDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import remote.Clock;
 import tableEntities.User;
 import utility.HashPassword;
 
@@ -25,12 +26,16 @@ public class UserWS {
 	@EJB
     UserDAO userDAO;
 
+	@EJB
+	Clock clock;
+
 	Logger logger = LoggerFactory.getLogger(UserWS.class);
 
 	@GET
 	@Path("/test")
 	public Response test(){
 	    logger.info("TEST URL HIT");
+	    logger.info("Time to meet " + clock.getTimeToMeet());
 		return Response.status(200).entity("{\"response\":\"testResponse\"}").build();
 	}
 	
