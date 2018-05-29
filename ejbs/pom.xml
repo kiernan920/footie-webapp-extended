@@ -34,7 +34,14 @@
   </dependencies>
 
   <build>
-    <plugins>
+    
+  </build>
+
+<profiles>
+  <profile>
+      <id>deployEjbToDocker</id>
+      <build>
+        <plugins>
       <plugin>
         <artifactId>maven-ejb-plugin</artifactId>
         <configuration>
@@ -73,5 +80,7 @@
         </executions>
       </plugin>
     </plugins>
-  </build>
+      </build>
+    </profile>
+  </profiles>
 </project>

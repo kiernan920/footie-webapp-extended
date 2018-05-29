@@ -27,6 +27,18 @@ services:
      networks:
            vpcbr:
              ipv4_address: 10.5.0.3
+             
+  jboss3:
+     container_name: wildfly_container3
+     image: jboss/wildfly:12.0.0.Final
+     volumes:
+       - ./wildfly_customization/:/opt/jboss/wildfly/customization/
+       - .wildfly_customization/ejbToBeDeployed/:/opt/jboss/wildfly/ejbToBeDeployed/
+     command: /opt/jboss/wildfly/customization/remote/execute_config_for_remote.sh
+     tty: true
+     networks:
+           vpcbr:
+             ipv4_address: 10.5.0.6
 
   mysql:
     container_name: mysql_container
