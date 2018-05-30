@@ -4,7 +4,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 
-@Remote
+@Remote(ClockInterface.class)
 @Stateless
 public class RemoteClock implements ClockInterface {
 
