@@ -16,7 +16,7 @@ function wait_for_server() {
   done
 }
 
-/opt/jboss/wildfly/bin/add-user.sh --silent=true ejb test ApplicationRealm
+/opt/jboss/wildfly/bin/add-user.sh -a --silent=true --user ejb --password test
 
 echo "=> Starting WildFly server"
 $JBOSS_HOME/bin/$JBOSS_MODE.sh -c $JBOSS_CONFIG > /dev/null &
