@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 @Stateless
 public class RemoteClock implements ClockInterface {
 
+	@Override
 	public int getTimeToMeet(){
    	    return 5;
 	}

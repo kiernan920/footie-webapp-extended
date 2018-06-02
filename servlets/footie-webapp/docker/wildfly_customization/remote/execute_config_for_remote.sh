@@ -15,11 +15,12 @@ function wait_for_server() {
     sleep 1
   done
 }
-
+cp -rf /opt/jboss/wildfly/customization/remote/standalone-full.xml /opt/jboss/wildfly/standalone/configuration
 /opt/jboss/wildfly/bin/add-user.sh -a --silent=true --user ejb --password test
+/opt/jboss/wildfly/bin/add-user.sh --silent=true --user ejb --password test
 
 echo "=> Starting WildFly server"
-$JBOSS_HOME/bin/$JBOSS_MODE.sh -c $JBOSS_CONFIG > /dev/null &
+$JBOSS_HOME/bin/$JBOSS_MODE.sh -server-config=standalone-full.xml > /dev/null &
 
 echo "=> Waiting for the server to boot"
 wait_for_server

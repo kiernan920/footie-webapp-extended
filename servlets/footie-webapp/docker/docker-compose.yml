@@ -8,7 +8,6 @@ services:
     volumes:
       - ./wildfly_customization/com/:/opt/jboss/wildfly/modules/com/
       - ./wildfly_customization/:/opt/jboss/wildfly/customization/
-      - ./wildfly_customization/warToBeDeployed/:/opt/jboss/wildfly/warToBeDeployed/
     command: /opt/jboss/wildfly/customization/master/execute_config_for_master.sh
     tty: true
     networks:
@@ -21,7 +20,6 @@ services:
      volumes:
        - ./wildfly_customization/com/:/opt/jboss/wildfly/modules/com/
        - ./wildfly_customization/:/opt/jboss/wildfly/customization/
-       - .wildfly_customization/warToBeDeployed/:/opt/jboss/wildfly/warToBeDeployed/
      command: /opt/jboss/wildfly/customization/slave/execute_config_for_slave.sh
      tty: true
      networks:
@@ -33,7 +31,6 @@ services:
      image: jboss/wildfly:12.0.0.Final
      volumes:
        - ./wildfly_customization/:/opt/jboss/wildfly/customization/
-       - .wildfly_customization/ejbToBeDeployed/:/opt/jboss/wildfly/ejbToBeDeployed/
      command: /opt/jboss/wildfly/customization/remote/execute_config_for_remote.sh
      tty: true
      networks:

@@ -3,7 +3,7 @@ package restful;
 import dao.UserDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import remote.Clock;
+
 import remote.ClockInterface;
 import tableEntities.User;
 import utility.HashPassword;
@@ -25,23 +25,23 @@ import java.util.List;
 public class UserWS {
 
 	@EJB
-    UserDAO userDAO;
+    private UserDAO userDAO;
 
-	@EJB
-	Clock clock;
+//	@EJB
+//	private Clock clock;
 
-	@EJB
-	ClockInterface clockInterface;
+	@EJB(lookup = "ejb://ejbs//RemoteClock!remote.ClockInterface")
+	private ClockInterface clockInterface;
 
-	Logger logger = LoggerFactory.getLogger(UserWS.class);
+	private Logger logger = LoggerFactory.getLogger(UserWS.class);
 
 	@GET
 	@Path("/test")
 	public Response test(){
-		logger.info("HELL");
-		logger.info("" + clockInterface.getTimeToMeet());
-	    logger.info("TEST URL HIT");
-	    logger.info("Time to meet " + clock.getTimeToMeet());
+		logger.info("test");
+		logger.info("Time to meet " + clockInterface.getTimeToMeet());
+	    logger.info("testy");
+	    //logger.info("Time to meet " + clock.getTimeToMeet());
 		return Response.status(200).entity("{\"response\":\"testResponse\"}").build();
 	}
 	
@@ -50,7 +50,7 @@ public class UserWS {
 	public Response checkUserNameAndPassword(
 			@PathParam("username") String username,
 			@PathParam("password") String password) {
-		System.out.println("HELLO (((*$$***£*£*£** ***£*");
+		logger.info("verifying username and pasword");
 		final String SALT = "SALT";
 		HashPassword hp = new HashPassword();
 		String hashedPassword = hp.hashPassword(password+SALT);
