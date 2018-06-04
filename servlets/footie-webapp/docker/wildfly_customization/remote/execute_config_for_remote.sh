@@ -11,7 +11,7 @@ JBOSS_MODE=${1:-"standalone"}
 JBOSS_CONFIG=${2:-"$JBOSS_MODE.xml"}
 
 function wait_for_server() {
-  until `$JBOSS_CLI -c "ls /deployment" &> /dev/null`; do
+  until `$JBOSS_CLI -c --controller=10.5.0.6:9990 "ls /deployment" &> /dev/null`; do
     sleep 1
   done
 }

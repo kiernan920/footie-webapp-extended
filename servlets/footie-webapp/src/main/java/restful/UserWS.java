@@ -11,13 +11,18 @@ import utility.HashPassword;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.naming.Context;
+
+import javax.naming.InitialContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.core.Context;
+
 import javax.ws.rs.core.Response;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Properties;
 
 @Path("/users")
 @Stateless
@@ -30,21 +35,20 @@ public class UserWS {
 //	@EJB
 //	private Clock clock;
 
-	@EJB(lookup = "ejb://ejbs//RemoteClock!remote.ClockInterface")
+	@EJB(lookup = "ejb://ejbs-1.0-SNAPSHOT//RemoteClock!remote.ClockInterface")
 	private ClockInterface clockInterface;
 
 	private Logger logger = LoggerFactory.getLogger(UserWS.class);
 
 	@GET
 	@Path("/test")
-	public Response test(){
-		logger.info("test");
+	public Response test() {
+		logger.info("test-1");
 		logger.info("Time to meet " + clockInterface.getTimeToMeet());
-	    logger.info("testy");
 	    //logger.info("Time to meet " + clock.getTimeToMeet());
 		return Response.status(200).entity("{\"response\":\"testResponse\"}").build();
 	}
-	
+
 	@GET
 	@Path("/check/{username}/{password}")
 	public Response checkUserNameAndPassword(
