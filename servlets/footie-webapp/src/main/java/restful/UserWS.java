@@ -35,7 +35,7 @@ public class UserWS {
 //	@EJB
 //	private Clock clock;
 
-	@EJB(lookup = "ejb://ejbs-1.0-SNAPSHOT//RemoteClock!remote.ClockInterface")
+	@EJB(lookup = "ejb://ejbs//RemoteClock!remote.ClockInterface")
 	private ClockInterface clockInterface;
 
 	private Logger logger = LoggerFactory.getLogger(UserWS.class);

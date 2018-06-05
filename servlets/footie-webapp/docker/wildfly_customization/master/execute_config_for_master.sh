@@ -10,7 +10,6 @@ function waitForSlaveToBoot {
 	status=""
 	while [[ "$status" != *'STARTED'* ]];do
 		status=$(/opt/jboss/wildfly/bin/jboss-cli.sh -c --controller=10.5.0.2:9990 --commands="/host=slave/server-config=server-three-slave:read-resource(include-runtime=true)" | grep "STARTED")
-		echo $status
 		if [[ "$status" != *"STARTED"* ]]; then
 			echo "Master waiting for Slave..."
 			sleep 1
@@ -21,7 +20,7 @@ function waitForSlaveToBoot {
 cp -rf /opt/jboss/wildfly/customization/common/domain.xml /opt/jboss/wildfly/domain/configuration
 cp -rf /opt/jboss/wildfly/customization/master/host.xml /opt/jboss/wildfly/domain/configuration
 
-echo "Starting Master"
+echo "Starting Master Server"
 $JBOSS_HOME/bin/${JBOSS_MODE_ARRAY[1]}.sh > /dev/null &
 
 /opt/jboss/wildfly/bin/add-user.sh --silent=true admin1 admin1

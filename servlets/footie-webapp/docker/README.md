@@ -18,3 +18,5 @@ docker logs --follow wildfly_container2
 http://10.5.0.4/footie-webapp/rest/users/test
 
 ##jmeter -n -t tests/trivial/footie_test_plan.jmx -l ./tests/trivial/footie_test_plan.jmx
+
+mvn clean install -PdeployToDocker -PdeployEjbToDocker

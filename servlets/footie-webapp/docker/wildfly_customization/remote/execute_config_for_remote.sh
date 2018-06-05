@@ -12,6 +12,7 @@ JBOSS_CONFIG=${2:-"$JBOSS_MODE.xml"}
 
 function wait_for_server() {
   until `$JBOSS_CLI -c --controller=10.5.0.6:9990 "ls /deployment" &> /dev/null`; do
+    echo "Remote Standalone waiting for itself..."
     sleep 1
   done
 }
@@ -19,14 +20,13 @@ cp -rf /opt/jboss/wildfly/customization/remote/standalone-full.xml /opt/jboss/wi
 /opt/jboss/wildfly/bin/add-user.sh -a --silent=true --user ejb --password test
 /opt/jboss/wildfly/bin/add-user.sh --silent=true --user ejb --password test
 
-echo "=> Starting WildFly server"
+echo "Starting Remote Standalone Server"
 $JBOSS_HOME/bin/$JBOSS_MODE.sh -server-config=standalone-full.xml > /dev/null &
 
-echo "=> Waiting for the server to boot"
 wait_for_server
 
 echo "=> Copying EJB"
-cp -r /opt/jboss/wildfly/customization/ejbToBeDeployed/ejbs-1.0-SNAPSHOT.jar /opt/jboss/wildfly/standalone/deployments/
+cp -r /opt/jboss/wildfly/customization/ejbToBeDeployed/ejbs.jar /opt/jboss/wildfly/standalone/deployments/
 
 echo "=> Tailing server.log"
 tail -f /opt/jboss/wildfly/standalone/log/server.log

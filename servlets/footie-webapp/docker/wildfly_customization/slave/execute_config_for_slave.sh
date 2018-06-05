@@ -10,7 +10,6 @@ function waitForMasterToBoot {
 	status=""
 	while [[ "$status" != *'running'* ]];do
 		status=$(/opt/jboss/wildfly/bin/jboss-cli.sh -c --controller=10.5.0.2:9990 --user=admin1 --password=admin1 --commands="/host=master:read-attribute(name=host-state)" | grep "running")
-		echo $status
 		if [[ "$status" != *"running"* ]]; then
 			echo "Slave waiting for Master..."
 			sleep 1
@@ -24,7 +23,6 @@ function waitForSlaveToBoot {
 	status=""
 	while [[ "$status" != *'running'* ]];do
 		status=$(/opt/jboss/wildfly/bin/jboss-cli.sh -c --controller=10.5.0.2:9990 --user=admin1 --password=admin1 --commands="/host=slave:read-attribute(name=host-state)" | grep "running")
-		echo $status
 		if [[ "$status" != *"running"* ]]; then
 			echo "Slave waiting for itself..."
 			sleep 1
