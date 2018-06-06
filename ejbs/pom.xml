@@ -81,7 +81,7 @@
 
 <profiles>
   <profile>
-      <id>deployEjbToDocker</id>
+      <id>deployEjb</id>
       <build>
         <plugins>
       <plugin>

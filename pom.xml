@@ -16,7 +16,7 @@
     <module>primary-source</module>
     <module>servlets</module>
     <module>ejbs</module>
-    <module>ejbs2</module>
+    <module>sameJvmEjb</module>
     <module>ear</module>
   </modules>
 
