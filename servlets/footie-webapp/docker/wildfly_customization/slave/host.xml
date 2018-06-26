@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 
-<!--DEMO - changed the name to slave-->
+<!--DEMO1c - name=slave to make this slave-->
 <host xmlns="urn:jboss:domain:6.0" name="slave">
     <extensions>
         <extension module="org.jboss.as.jmx"/>
@@ -9,11 +9,12 @@
     </extensions>
     <management>
         <security-realms>
-            <!--DEMO - changed the name to slave-->
             <security-realm name="ManagementRealm">
+                <!--DEMO1d - Added <server-identies> base64 hash of master (domain controller) management password -->
                 <server-identities>
                     <secret value="c2xhdmU="></secret>
                 </server-identities>
+
                 <authentication>
                     <local default-user="$local" skip-group-loading="true"/>
                     <properties path="mgmt-users.properties" relative-to="jboss.domain.config.dir"/>
@@ -23,6 +24,7 @@
                 </authorization>
             </security-realm>
 
+            <!--Demo2j-->
             <security-realm name="ejb-security-realm">
                <server-identities>
                   <secret value="dGVzdA=="/>
@@ -77,10 +79,10 @@
     <domain-controller>
         <!--<local/>-->
         <!-- Alternative remote domain controller configuration with a host and port -->
-        <!--DEMO - Modify to allow slave to connect to master management port-->
+        <!--DEMO1g - Modify to allow slave to connect to master management port-->
          <remote protocol="remote" host="${jboss.domain.master.address:10.5.0.2}" port="${jboss.domain.master.port:9999}" security-realm="ManagementRealm"/>
     </domain-controller>
-    <!--DEMO - add IP address of Slave-->
+    <!--DEMO1e - add IP address of Slave-->
     <interfaces>
         <interface name="management">
             <inet-address value="${jboss.bind.address.management:10.5.0.3}"/>
@@ -120,7 +122,7 @@
               -->
             <socket-bindings port-offset="150"/>
         </server>
-        <!-- DEMO - change name to server-three slave autostart true -->
+        <!-- DEMO1h - change name to server-three slave autostart true -->
         <server name="server-three-slave" group="other-server-group" auto-start="true">
             <jvm name="default"/>
             <!--

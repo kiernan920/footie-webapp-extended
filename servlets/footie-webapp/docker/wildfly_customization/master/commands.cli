@@ -10,6 +10,5 @@ data-source --profile=full-ha add --name=Tutorial --driver-name=mysql --jndi-nam
 deploy /opt/jboss/wildfly/customization/warToBeDeployed/footie-webapp.war --server-groups=other-server-group
 deploy /opt/jboss/wildfly/customization/ejbToBeDeployed/sameJvmEjb.jar --server-groups=other-server-group
 
-
 # Execute the batch
 run-batch

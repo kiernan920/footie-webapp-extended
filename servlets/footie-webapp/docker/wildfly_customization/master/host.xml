@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 
-<!--DEMO - kept name as master-->
+<!--DEMO1a - kept as master-->
 <host xmlns="urn:jboss:domain:6.0" name="master">
     <extensions>
         <extension module="org.jboss.as.jmx"/>
@@ -9,6 +9,8 @@
     </extensions>
     <management>
         <security-realms>
+
+            <!--DEMO1b -->
             <security-realm name="ManagementRealm">
                 <authentication>
                     <local default-user="$local" skip-group-loading="true"/>
@@ -18,11 +20,14 @@
                     <properties path="mgmt-groups.properties" relative-to="jboss.domain.config.dir"/>
                 </authorization>
             </security-realm>
+
+            <!--DEMO2h-->
             <security-realm name="ejb-security-realm">
                <server-identities>
                   <secret value="dGVzdA=="/>
                </server-identities>
             </security-realm>
+
             <security-realm name="ApplicationRealm">
                 <server-identities>
                     <ssl>
@@ -72,7 +77,7 @@
         <!-- Alternative remote domain controller configuration with a host and port -->
         <!-- <remote protocol="remote" host="${jboss.domain.master.address}" port="${jboss.domain.master.port:9999}" security-realm="ManagementRealm"/> -->
     </domain-controller>
-    <!--DEMO - set up IP address of master-->
+    <!--DEMO1f - set up IP address of master-->
     <interfaces>
         <interface name="management">
             <inet-address value="${jboss.bind.address.management:10.5.0.2}"/>
@@ -112,7 +117,7 @@
               -->
             <socket-bindings port-offset="150"/>
         </server>
-        <!-- DEMO - keep name to server-three autostart true -->
+        <!-- DEMO1i - keep name to server-three autostart true -->
         <server name="server-three" group="other-server-group" auto-start="true">
             <jvm name="default"/>
             <!--

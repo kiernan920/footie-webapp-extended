@@ -33,6 +33,7 @@ public class UserWS {
 //	@EJB
 //	private Clock clock;
 
+	//DEMO2d
 	@EJB(lookup = "ejb://ejbs//RemoteClock!remote.ClockInterface")
 	private ClockInterface clockInterface;
 
@@ -44,9 +45,7 @@ public class UserWS {
 	@GET
 	@Path("/test")
 	public Response test() {
-		logger.info("test-1");
 		logger.info("Time to meet " + clockInterface.getTimeToMeet());
-		logger.info("WHATS HAPPENING");
 	    //logger.info("Time to meet " + clock.getTimeToMeet());
 //		logger.info("Time to meet 2 " + sameJvmEjbClock.getTimeToMeet());
 		return Response.status(200).entity("{\"response\":\"testResponse\"}").build();

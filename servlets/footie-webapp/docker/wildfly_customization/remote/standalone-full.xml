@@ -529,6 +529,7 @@
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:weld:4.0"/>
     </profile>
+    <!--DEMO2e-->
     <interfaces>
         <interface name="management">
             <inet-address value="${jboss.bind.address.management:10.5.0.6}"/>

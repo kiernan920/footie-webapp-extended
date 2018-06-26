@@ -1610,7 +1610,6 @@
                 <remote-naming/>
             </subsystem>
             <subsystem xmlns="urn:jboss:domain:pojo:1.0"/>
-            <!--DEMO2-->
             <subsystem xmlns="urn:jboss:domain:remoting:4.0">
                 <http-connector name="http-remoting-connector" connector-ref="default" security-realm="ApplicationRealm"/>
                 <outbound-connections>
@@ -1831,7 +1830,7 @@
             <outbound-socket-binding name="mail-smtp">
                 <remote-destination host="localhost" port="25"/>
             </outbound-socket-binding>
-            <!--DEMO2-->
+            <!--DEMO2i-->
             <outbound-socket-binding name="remote-ejb">
                 <remote-destination host="10.5.0.6" port="8080"/>
             </outbound-socket-binding>
@@ -1853,6 +1852,8 @@
             </jvm>
             <socket-binding-group ref="full-sockets"/>
         </server-group>
+
+        <!--DEMO1j-->
         <server-group name="other-server-group" profile="full-ha">
             <jvm name="default">
                 <heap size="64m" max-size="512m"/>
@@ -1862,6 +1863,7 @@
 
             </deployments>
         </server-group>
+
     </server-groups>
     <host-excludes>
         <host-exclude name="WildFly10.0">

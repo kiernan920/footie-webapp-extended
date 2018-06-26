@@ -11,11 +11,14 @@ JBOSS_MODE=${1:-"standalone"}
 JBOSS_CONFIG=${2:-"$JBOSS_MODE.xml"}
 
 function wait_for_server() {
+Demo2g
   until `$JBOSS_CLI -c --controller=10.5.0.6:9990 "ls /deployment" &> /dev/null`; do
     echo "Remote Standalone waiting for itself..."
     sleep 1
   done
 }
+
+//DEMO2f
 cp -rf /opt/jboss/wildfly/customization/remote/standalone-full.xml /opt/jboss/wildfly/standalone/configuration
 /opt/jboss/wildfly/bin/add-user.sh -a --silent=true --user ejb --password test
 /opt/jboss/wildfly/bin/add-user.sh --silent=true --user ejb --password test

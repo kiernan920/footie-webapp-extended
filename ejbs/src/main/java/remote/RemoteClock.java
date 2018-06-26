@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
+////DEMO2b
 
 @Remote(ClockInterface.class)
 @Stateless
