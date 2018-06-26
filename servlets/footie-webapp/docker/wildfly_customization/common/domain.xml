@@ -1610,7 +1610,8 @@
                 <remote-naming/>
             </subsystem>
             <subsystem xmlns="urn:jboss:domain:pojo:1.0"/>
-            <subsystem xmlns="urn:jboss:domain:remoting:4.0"><!-- changed from 4.0  -->
+            <!--DEMO2-->
+            <subsystem xmlns="urn:jboss:domain:remoting:4.0">
                 <http-connector name="http-remoting-connector" connector-ref="default" security-realm="ApplicationRealm"/>
                 <outbound-connections>
                     <remote-outbound-connection name="remote-ejb-connection" outbound-socket-binding-ref="remote-ejb" protocol="http-remoting" security-realm="ejb-security-realm" username="ejb">
@@ -1830,6 +1831,7 @@
             <outbound-socket-binding name="mail-smtp">
                 <remote-destination host="localhost" port="25"/>
             </outbound-socket-binding>
+            <!--DEMO2-->
             <outbound-socket-binding name="remote-ejb">
                 <remote-destination host="10.5.0.6" port="8080"/>
             </outbound-socket-binding>

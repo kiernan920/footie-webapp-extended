@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 
+<!--DEMO - changed the name to slave-->
 <host xmlns="urn:jboss:domain:6.0" name="slave">
     <extensions>
         <extension module="org.jboss.as.jmx"/>
@@ -8,6 +9,7 @@
     </extensions>
     <management>
         <security-realms>
+            <!--DEMO - changed the name to slave-->
             <security-realm name="ManagementRealm">
                 <server-identities>
                     <secret value="c2xhdmU="></secret>
@@ -20,11 +22,13 @@
                     <properties path="mgmt-groups.properties" relative-to="jboss.domain.config.dir"/>
                 </authorization>
             </security-realm>
+
             <security-realm name="ejb-security-realm">
                <server-identities>
                   <secret value="dGVzdA=="/>
                </server-identities>
             </security-realm>
+
             <security-realm name="ApplicationRealm">
                 <server-identities>
                     <ssl>
@@ -39,6 +43,7 @@
                     <properties path="application-roles.properties" relative-to="jboss.domain.config.dir"/>
                 </authorization>
             </security-realm>
+
         </security-realms>
         <audit-log>
             <formatters>
@@ -72,8 +77,10 @@
     <domain-controller>
         <!--<local/>-->
         <!-- Alternative remote domain controller configuration with a host and port -->
+        <!--DEMO - Modify to allow slave to connect to master management port-->
          <remote protocol="remote" host="${jboss.domain.master.address:10.5.0.2}" port="${jboss.domain.master.port:9999}" security-realm="ManagementRealm"/>
     </domain-controller>
+    <!--DEMO - add IP address of Slave-->
     <interfaces>
         <interface name="management">
             <inet-address value="${jboss.bind.address.management:10.5.0.3}"/>
@@ -113,6 +120,7 @@
               -->
             <socket-bindings port-offset="150"/>
         </server>
+        <!-- DEMO - change name to server-three slave autostart true -->
         <server name="server-three-slave" group="other-server-group" auto-start="true">
             <jvm name="default"/>
             <!--

@@ -5,26 +5,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import remote.ClockInterface;
-import remote.ClockInterfaceTwo;
 import tableEntities.User;
 import utility.HashPassword;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.naming.Context;
-
-import javax.naming.InitialContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
 import javax.ws.rs.core.Response;
-import java.time.Clock;
-import java.util.Hashtable;
+
+
 import java.util.List;
-import java.util.Properties;
+
 
 @Path("/users")
 @Stateless
@@ -39,10 +35,9 @@ public class UserWS {
 
 	@EJB(lookup = "ejb://ejbs//RemoteClock!remote.ClockInterface")
 	private ClockInterface clockInterface;
-	//java:global/sameJvmEjb/Clock!remote.ClockInterfaceTwo
-	//java:app/sameJvmEjb-1.0-SNAPSHOT/Clock!remote.ClockInterfaceTwo
-	@EJB(lookup = "java:global/sameJvmEjb/Clock!remote.ClockInterfaceTwo")
-	private ClockInterfaceTwo sameJvmEjbClock;
+
+//	@EJB(lookup = "java:global/sameJvmEjb/Clock!remote.ClockInterfaceTwo")
+//	private ClockInterfaceTwo sameJvmEjbClock;
 
 	private Logger logger = LoggerFactory.getLogger(UserWS.class);
 
@@ -51,8 +46,9 @@ public class UserWS {
 	public Response test() {
 		logger.info("test-1");
 		logger.info("Time to meet " + clockInterface.getTimeToMeet());
+		logger.info("WHATS HAPPENING");
 	    //logger.info("Time to meet " + clock.getTimeToMeet());
-		logger.info("Time to meet 2 " + sameJvmEjbClock.getTimeToMeet());
+//		logger.info("Time to meet 2 " + sameJvmEjbClock.getTimeToMeet());
 		return Response.status(200).entity("{\"response\":\"testResponse\"}").build();
 	}
 
