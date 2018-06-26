@@ -11,7 +11,7 @@ JBOSS_MODE=${1:-"standalone"}
 JBOSS_CONFIG=${2:-"$JBOSS_MODE.xml"}
 
 function wait_for_server() {
-Demo2g
+#Demo2g
   until `$JBOSS_CLI -c --controller=10.5.0.6:9990 "ls /deployment" &> /dev/null`; do
     echo "Remote Standalone waiting for itself..."
     sleep 1
