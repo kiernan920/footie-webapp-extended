@@ -1,12 +1,4 @@
-Run Jboss Server -->
-./jboss-eap-6.4/bin/standalone.sh
-
-Deploy Application -->
-mvn clean install. This will deploy the application onto JBoss
-
-Database Setup -->
-import footiedb_User.sql into MySql database
-
-Run Arquillian -->
-Run Jboss Server
-mvn clean test -Parq-jbossas-remote
+https://docs.jboss.org/author/display/WFLY10/EJB+invocations+from+a+remote+server+instance
+https://symbiotics.co.za/configure-apache-with-mod_cluster-load-balancer-on-ubuntu/
+https://symbiotics.co.za/wildfly-domain-management/
+https://docs.jboss.org/author/display/WFLY10/Clustering+and+Domain+Setup+Walkthrough
