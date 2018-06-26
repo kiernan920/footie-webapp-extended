@@ -15,6 +15,6 @@ public class RemoteClock implements ClockInterface {
 	
 	public int getTimeToMeet(){
 		logger.info("Remote call received");
-		return 5;
+   	    return 5;
 	}
 }
